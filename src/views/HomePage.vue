@@ -17,9 +17,17 @@ function apiTest(event: Event) {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => {
+    .then(async (response) => {
       if (response.status === 200) {
-        console.log('API is working')
+        const jsonResponse = await response.json()
+
+        console.log(jsonResponse)
+      }
+      if (response.status.toString().startsWith('4')) {
+        console.log('Error in request')
+      }
+      if (response.status.toString().startsWith('5')) {
+        console.log('Internal Server Error')
       }
     })
     .catch((error) => {

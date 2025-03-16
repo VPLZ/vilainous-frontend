@@ -1,11 +1,11 @@
 <template>
   <div>
     <form class="loginForm centered">
-      <label for="username">Enter your username :</label>
-      <input type="text" id="username" name="username" />
+      <label for="email">Enter your email :</label>
+      <input type="text" id="email" name="email" />
       <br />
       <label for="password">Enter your password :</label>
-      <input type="text" id="password" name="password" />
+      <input type="password" id="password" name="password" />
       <br />
       <div class="centered" style="display: flex; justify-content: space-around">
         <button @click="submitForm">Login</button>
@@ -18,20 +18,18 @@
 <script lang="ts">
 import router from '@/router'
 import { globalVariables } from '@/stores/global_variables'
+import axios from 'axios'
 import { defineComponent } from 'vue'
 function submitForm(event: Event) {
   event.preventDefault()
+  const username = (document.getElementById('email') as HTMLInputElement).value
+  const password = (document.getElementById('password') as HTMLInputElement).value
 
-  fetch(globalVariables.API_URL + '/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: (document.getElementById('username') as HTMLInputElement).value,
-      password: (document.getElementById('password') as HTMLInputElement).value,
-    }),
-  })
+  axios
+    .post(globalVariables.API_URL + '/login', {
+      username,
+      password,
+    })
     .then((response) => {
       if (response.status === 200) {
         router.push('/homePage')
