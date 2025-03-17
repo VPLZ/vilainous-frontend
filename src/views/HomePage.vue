@@ -20,7 +20,6 @@ function apiTest(event: Event) {
     .then(async (response) => {
       if (response.status === 200) {
         const jsonResponse = await response.json()
-
         console.log(jsonResponse)
       }
       if (response.status.toString().startsWith('4')) {

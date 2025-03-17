@@ -38,7 +38,7 @@ export default defineComponent({
 
       if (password !== confirmPassword) {
         alert.hidden = false
-        alert.innerText = 'Les mots de passe ne correspondent pas.'
+        alert.innerText = 'Password are not the same.'
         return
       }
 
@@ -55,12 +55,16 @@ export default defineComponent({
           router.push('/login')
         } else {
           alert.hidden = false
-          alert.innerText = "Une erreur s'est produite lors de la requête."
+          alert.innerText = 'An error has been sent from the server, retry later.'
         }
       } catch (error) {
         console.error(error)
         alert.hidden = false
-        alert.innerText = 'Erreur de connexion au serveur.'
+        if (axios.isAxiosError(error) && error.response) {
+          alert.innerText = error.response.data.message || 'Server side error.'
+        } else {
+          alert.innerText = 'Error connecting to the server.'
+        }
       }
     },
     toLogin() {
