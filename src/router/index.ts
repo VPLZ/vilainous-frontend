@@ -26,7 +26,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(async () => {
+router.beforeEach(async (to) => {
   const cookies = document.cookie
   const values = cookies.split(';')
   let token
@@ -36,15 +36,21 @@ router.beforeEach(async () => {
     }
   })
   console.log(token)
-  axios
-    .post(globalVariables.API_URL + '/verifyToken', {
-      token,
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        console.log('UnAuthorized')
-        return { name: 'login' }
-      }
-    })
+  if (!token && to.name !== 'login') return { name: 'login' }
+  try {
+    await axios
+      .get(globalVariables.API_URL + '/authenticate', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        if (response.status != 200 && to.name !== 'login') {
+          return { name: 'login' }
+        }
+      })
+  } catch (error) {
+    console.log(error)
+  }
 })
 export default router
