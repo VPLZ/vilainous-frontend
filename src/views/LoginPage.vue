@@ -44,6 +44,7 @@ function submitForm(event: Event) {
 
 function toRegisterPage(event: Event) {
   event.preventDefault()
+  console.log('Register')
   router.push('/register')
 }
 
