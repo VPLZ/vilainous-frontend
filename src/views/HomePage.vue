@@ -3,40 +3,30 @@
     <h1>Welcome to the Home Page</h1>
     <p>Here you can see all the posts</p>
     <button @click="apiTest">Test API</button>
+    <button @click="logout">Logout</button>
   </div>
 </template>
 
 <script lang="ts">
 import { globalVariables } from '@/stores/global_variables'
-
-function apiTest(event: Event) {
+import axios from 'axios'
+async function logout(event: Event) {
   event.preventDefault()
-  fetch(globalVariables.API_URL + '/', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(async (response) => {
-      if (response.status === 200) {
-        const jsonResponse = await response.json()
-        console.log(jsonResponse)
-      }
-      if (response.status.toString().startsWith('4')) {
-        console.log('Error in request')
-      }
-      if (response.status.toString().startsWith('5')) {
-        console.log('Internal Server Error')
-      }
-    })
-    .catch((error) => {
-      console.error('Problem with api' + error)
-    })
+  const response = await axios.post(globalVariables.API_URL + '/logout')
+  console.log(response)
+}
+async function apiTest(event: Event) {
+  event.preventDefault()
+  const response = await axios.get(globalVariables.API_URL + '/')
+  if (response.status == 200) {
+    console.log(response.data)
+  }
 }
 
 export default {
   methods: {
     apiTest,
+    logout,
   },
 }
 </script>
