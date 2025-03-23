@@ -50,6 +50,7 @@ onMounted(() => {
 
 <style>
 .column {
+  width: 700px;
   display: flex;
 }
 .left_part_menu * {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <form class="loginForm centered">
       <label for="email">Enter your email :</label>
       <input type="email" id="email" name="email" required />
@@ -59,10 +59,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .centered {
   text-align: center;
 }
-
+button {
+  width: 45%;
+  height: 30px;
+  font-size: medium;
+}
 .loginForm {
   margin: 0 auto;
   width: 70%;
