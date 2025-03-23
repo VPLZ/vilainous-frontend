@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <form id="registerForm" class="registerForm centered" @submit.prevent="register">
       <p class="alert" hidden></p>
       <label for="username">Enter your username :</label>
@@ -78,7 +78,16 @@ export default defineComponent({
 .centered {
   text-align: center;
 }
-
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  width: 45%;
+  height: 30px;
+  font-size: medium;
+}
 .registerForm {
   margin: 0 auto;
   width: 70%;
