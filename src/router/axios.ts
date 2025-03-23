@@ -6,7 +6,6 @@ const api = axios.create({
   baseURL: globalVariables.API_URL,
 })
 
-// Ajouter le token avant chaque requête
 api.interceptors.request.use(
   (config) => {
     const cookies = document.cookie
@@ -25,7 +24,6 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 )
 
-// Gérer les erreurs 401 et rafraîchir le token
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
