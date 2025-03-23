@@ -36,19 +36,9 @@ router.beforeEach(async (to) => {
     }
   })
   console.log(token)
-  if (!token && to.name !== 'login') return { name: 'login' }
+  if (!token && to.name !== 'login' && to.name !== 'register') return { name: 'login' }
   try {
-    await axios
-      .get(globalVariables.API_URL + '/authenticate', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.status != 200 && to.name !== 'login') {
-          return { name: 'login' }
-        }
-      })
+    await axios.get(globalVariables.API_URL + '/authenticate')
   } catch (error) {
     console.log(error)
   }

@@ -9,15 +9,19 @@
 
 <script lang="ts">
 import { globalVariables } from '@/stores/global_variables'
-import axios from 'axios'
+import api from '../router/axios'
 async function logout(event: Event) {
   event.preventDefault()
-  const response = await axios.post(globalVariables.API_URL + '/logout')
-  console.log(response)
+  const response = await api.post(globalVariables.API_URL + '/logout')
+  if (response.status == 200) {
+    console.log(response)
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    window.location.reload()
+  }
 }
 async function apiTest(event: Event) {
   event.preventDefault()
-  const response = await axios.get(globalVariables.API_URL + '/')
+  const response = await api.get(globalVariables.API_URL + '/')
   if (response.status == 200) {
     console.log(response.data)
   }
