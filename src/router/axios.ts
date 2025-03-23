@@ -29,7 +29,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log('Hello')
     if (
       error.response &&
       error.response.status === 401 &&
