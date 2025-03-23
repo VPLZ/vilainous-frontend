@@ -1,6 +1,6 @@
 <template>
   <div class="buttonsContainer">
-    <button>Hosting Game</button>
+    <button @click="hosting">Hosting Game</button>
     <button>Joining Game</button>
     <button>Tutorial</button>
     <button @click="logout">Logout</button>
@@ -17,6 +17,7 @@
 <script lang="ts">
 import { globalVariables } from '@/stores/global_variables'
 import api from '../router/axios'
+import router from '@/router'
 async function logout(event: Event) {
   event.preventDefault()
   const response = await api.post(globalVariables.API_URL + '/logout')
@@ -26,10 +27,15 @@ async function logout(event: Event) {
     window.location.reload()
   }
 }
+function hosting(event: Event) {
+  event.preventDefault()
+  router.push('/hosting')
+}
 
 export default {
   methods: {
     logout,
+    hosting,
   },
 }
 </script>
