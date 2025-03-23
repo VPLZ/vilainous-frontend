@@ -3,11 +3,11 @@ import HomeMenu from '@/components/HomeMenu.vue'
 import { onMounted, ref } from 'vue'
 
 const imageSources: string[] = [
-  '/images/hades.jpg',
-  '/images/hook.jpg',
-  '/images/maleficient.png',
-  '/images/medusa.jpg',
-  '/images/cruela.jpg',
+  '/images/vilains/hades.jpg',
+  '/images/vilains/hook.jpg',
+  '/images/vilains/maleficient.png',
+  '/images/vilains/medusa.jpg',
+  '/images/vilains/cruela.jpg',
 ]
 
 let index = 0
@@ -41,7 +41,7 @@ onMounted(() => {
     </div>
     <img
       ref="vilainImage"
-      src="/images/cruela.jpg"
+      src="/images/vilains/cruela.jpg"
       alt="Vilain Image"
       :class="{ fading: isFading }"
     />
