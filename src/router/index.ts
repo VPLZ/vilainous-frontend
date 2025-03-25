@@ -4,6 +4,7 @@ import RegisterPage from '@/views/RegisterPage.vue'
 import HomePage from '@/views/HomePage.vue'
 import axios from 'axios'
 import { globalVariables } from '@/stores/global_variables'
+import HostingGame from '@/views/HostingGame.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/',
       name: 'homePage',
       component: HomePage,
+    },
+    {
+      path: '/hosting',
+      name: 'hostingGame',
+      component: HostingGame,
     },
   ],
 })
